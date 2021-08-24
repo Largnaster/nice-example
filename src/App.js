@@ -94,7 +94,7 @@ function App() {
         <Button variant="contained" onClick={getImagen}>Imagen</Button>
         <br />
         <div className={classes.root}>
-          <ImageList rowHeight={300} className={classes.imageList} cols={4}>
+          <ImageList rowHeight={300} className={classes.imageList} cols={3}>
             {imagen.map((src) => (
               <ImageListItem key={src} cols={1}>
                 <img src={src} alt={"Una imagen simple"} />
