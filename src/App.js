@@ -1,122 +1,160 @@
-import { useState } from "react";
-import { Button } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
-import ImageList from "@material-ui/core/ImageList"
-import ImageListItem from "@material-ui/core/ImageListItem"
+import * as React from "react";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  CssBaseline,
+  Grid,
+  Stack,
+  Box,
+  Typography,
+  Container,
+  Link,
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 
-// ESTILOS PARA LAS IMAGENES 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+// function for the copyright
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        Made with MUI
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+// defining cards
+const pages = [
+  {
+    number: 1,
+    name: "pwa",
+    link: "https://pwa-batr.herokuapp.com",
   },
-  imageList: {
-    width: '100%',
-    height: 'auto'
-  }
-}))
+];
+
+// Theme to be used by the application
+const theme = createTheme();
+
+// ESTILOS PARA LAS IMAGENES
 
 function App() {
-  // -- link a github: https://github.com/Largnaster/nice-example
-  // --SERIA UN PLUS UTILIZAR MATERIAL UI-- https://material-ui.com/
-  // DEFINICION DE VARIABLES
-  const [contador, setContador] = useState(0);
-  const [chiste, setChiste] = useState("");
-  const [imagen, setImagen] = useState([]);
-  // estilos
-  const classes = useStyles();
-
-  // FUNCIONE
-  const aumentar = () => {
-    setContador(contador + 1);
-  };
-  const reducir = () => {
-    if (contador > 0) {
-      setContador(contador - 1);
-    }
-  };
-  const getChiste = async () => {
-    const response = await fetch("https://api.chucknorris.io/jokes/random");
-    const content = await response.json();
-    console.log(content.value);
-    setChiste(content.value);
-  };
-  // const getChiste = () => {
-  //   fetch("https://api.chucknorris.io/jokes/random")
-  //   .then(res => res.json())
-  //   .then((result) => {
-  //     console.log(result.value)
-  //   })
-  // }
-  const getImagen = async () => {
-    const response = await fetch("https://source.unsplash.com/random");
-    console.log(response["url"]);
-    setImagen((imagenes) => [...imagenes, response["url"]]);
-
-    // fetch('https://source.unsplash.com/random')
-    // .then(res => res.json())
-    // .then((content) => {
-    //   console.log(content)
-    // })
-  };
-
   // RENDER
   return (
-    <Container>
-      <div>
-        <h1>Contador</h1>
-        <ButtonGroup color="primary" variant="contained" aria-label="contained primary button group">
-          <Button onClick={aumentar}>
-            +
-          </Button>
-          <Button onClick={reducir}>-</Button>
-          <Button onClick={() => setContador(0)}>reset</Button>
-        </ButtonGroup>
-        <p>{contador}</p>
-      </div>
-      <br />
-      <hr />
-      <div>
-        <h1>Chistes</h1>
-        <Button variant="contained" onClick={getChiste}>Chiste</Button>
-        <p>{chiste}</p>
-      </div>
-      <br />
-      <hr />
-      <div>
-        <h1>Imágenes</h1>
-        <Button variant="contained" onClick={getImagen}>Imagen</Button>
-        <br />
-        <div className={classes.root}>
-          <ImageList rowHeight={300} className={classes.imageList} cols={3}>
-            {imagen.map((src) => (
-              <ImageListItem key={src} cols={1}>
-                <img src={src} alt={"Una imagen simple"} />
-              </ImageListItem>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 4,
+          }}
+        >
+          <Container maxWidth="md">
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              I am Bryann and here are some of the web pages I have develop even
+              for college assigments or personal purposes.
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Button
+                variant="contained"
+                href="https://github.com/Largnaster/"
+                target="_blank"
+                rel="noopener"
+              >
+                GitHub profile
+              </Button>
+              <Button
+                variant="outlined"
+                href="https://www.linkedin.com/in/bryann-arlye-torres-rodríguez-bbb016198/"
+                target="_blank"
+                rel="noopener"
+              >
+                LinkedIn
+              </Button>
+            </Stack>
+          </Container>
+        </Box>
+        <Container sx={{ py: 1 }} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {pages.map((page) => (
+              <Grid item key={page.number} xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    height: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardMedia
+                    component="img"
+                    sx={{
+                      pt: "5%",
+                    }}
+                    image="/static/pwa_image.png"
+                    alt={page.name}
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      PWA
+                    </Typography>
+                    <Typography>
+                      This is a pwa web, is made using HTML, CSS and JavaScript.
+                      This uses the anilist API to list some shows within cards.
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      href={page.link}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      View
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
             ))}
-          </ImageList>
-        </div>
-        {/* {imagen.map((src) => {
-          return (
-            <img
-              id={"ima"}
-              key={src}
-              src={src}
-              alt={"Something or someone"}
-              width="400"
-              height="400"
-            ></img>
-          );
-        })} */}
-        <br/>
-      </div>
-    </Container>
+          </Grid>
+        </Container>
+      </main>
+      {/* Footer */}
+      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+        {/* <Typography variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography> */}
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Portfolio made by Largnaster
+        </Typography>
+        <Copyright />
+      </Box>
+      {/* End footer */}
+    </ThemeProvider>
   );
 }
 
