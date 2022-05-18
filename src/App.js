@@ -40,8 +40,23 @@ const pages = [
     number: 5,
     name: "calculator",
     link: "https://largnaster-react-calculator.herokuapp.com",
-    description: "Basic calculator made using Formik and React, it calculates the return of an investment."
-  }
+    description:
+      "Basic calculator made using Formik and React, it calculates the return of an investment.",
+  },
+  {
+    number: 6,
+    name: "shopping",
+    link: "https://largnaster-react-shop.herokuapp.com",
+    description:
+      "Shopping cart to add products and count them, made with React.",
+  },
+  {
+    number: 7,
+    name: "images",
+    link: "https://largnaster-react-images.herokuapp.com",
+    description:
+      "Image finder made with React and Formik, search a topic and press enter to get a list with results using Unsplash API.",
+  },
 ];
 
 // Theme to be used by the application
