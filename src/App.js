@@ -36,6 +36,12 @@ const pages = [
     description:
       "Made using Next.js, this is a simple application which uses pokeapi to get a list of pokemon and basic information of each pokemon.",
   },
+  {
+    number: 5,
+    name: "calculator",
+    link: "https://largnaster-react-calculator.herokuapp.com",
+    description: "Basic calculator made using Formik and React, it calculates the return of an investment."
+  }
 ];
 
 // Theme to be used by the application
